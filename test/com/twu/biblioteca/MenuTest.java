@@ -11,21 +11,21 @@ public class MenuTest {
     private Book[] books = new Book[1];
     private Librarian librarian;
 
-    @Before
-    public void setUp() {
-        factory = Mockito.mock(ScannerFactory.class);
-        librarian = Mockito.mock(Librarian.class);
-        menu = new Menu(factory.getInstance(), librarian);
-        Book book = Mockito.mock(Book.class);
-        //when(book.getTitle()).thenReturn("yala");
-        books[0] = book;
-        //menu = new Menu(Librarian librarian = new Librarian(Book books));
-    }
-
-    @Test
-    public void shouldDisplayWelcomeMessage() {
-        String message = menu.getWelcomeMessage();
-        assertEquals(menu.getWelcomeMessage(), message);
-    }
+//    @Before
+//    public void setUp() {
+//        factory = Mockito.mock(ScannerFactory.class);
+//        librarian = Mockito.mock(Librarian.class);
+//        menu = new Menu(factory.getInstance(), librarian);
+//        Book book = Mockito.mock(Book.class);
+//        //when(book.getTitle()).thenReturn("yala");
+//        books[0] = book;
+//        //menu = new Menu(Librarian librarian = new Librarian(Book books));
+//    }
+//
+//    @Test
+//    public void shouldDisplayWelcomeMessage() {
+//        String message = menu.getWelcomeMessage();
+//        assertEquals(menu.getWelcomeMessage(), message);
+//    }
 
 }
