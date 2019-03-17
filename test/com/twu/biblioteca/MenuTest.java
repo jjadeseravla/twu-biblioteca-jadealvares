@@ -24,13 +24,15 @@ public class MenuTest {
     private Librarian librarian;
     private Scanner scanner;
     private InputStream originalIn;
+    private Commands commands;
     //ScannerFactory factory;
 
     @Before
     public void setUp() {
         librarian = mock(Librarian.class);
         scanner = mock(Scanner.class);
-        menu = new Menu(librarian);
+        commands = mock(Commands.class);
+        menu = new Menu(librarian, commands);
         originalIn = System.in;
     }
 
@@ -53,17 +55,16 @@ public class MenuTest {
     @Test
     public void shouldBeAbleToSelectOption1toDisplayBook() {
         mockInput("1\n3\n2\n");
-        //sm = new Scannermocks();
-        menu = new Menu(librarian);
+        menu = new Menu(librarian, commands);
         assertEquals(menu.inputFromUser(), 1);
         assertEquals(menu.inputFromUser(), 3);
         assertEquals(menu.inputFromUser(), 2);
     }
 
     @Test
-    public void shouldBeAbleToSelectOption1toDisplayBook2() {
+    public void shouldBeAbleToSelectUnavailableOption() {
         mockInput("7\n");
-        menu = new Menu(librarian);
+        menu = new Menu(librarian, commands);
         assertEquals(menu.inputFromUser(), 7);
     }
 

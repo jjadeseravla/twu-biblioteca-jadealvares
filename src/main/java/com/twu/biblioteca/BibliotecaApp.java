@@ -11,7 +11,8 @@ public class BibliotecaApp {
         Book book3 = new Book("Sapians", "Yuval Herari", 2011);
         Librarian librarian = new Librarian(new Book [] {book1, book2, book3});
         Scanner scanner = new Scanner(System.in);
-        Menu menu = new Menu(librarian);
+        Commands commands = new Commands(new Book [] {book1, book2, book3});
+        Menu menu = new Menu(librarian, commands);
         System.out.println(menu.getWelcomeMessage());
         System.out.println(menu.showMenuOptions());
         menu.selector();

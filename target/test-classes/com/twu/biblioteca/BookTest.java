@@ -1,6 +1,9 @@
 package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
+
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class BookTest {
@@ -16,4 +19,10 @@ public class BookTest {
     public void getTitleTest() {
         assertEquals(book1Test.getTitle(), "my life");
     }
+
+    @Test
+    public void showsIfBookIsAvailableBeforeCheckingOut() {
+        assertTrue(book1Test.isBookAvailable());
+    }
+
 }

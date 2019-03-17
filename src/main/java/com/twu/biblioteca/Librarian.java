@@ -13,7 +13,9 @@ public class Librarian {
 
     public void listBooks() {
         for (int i = 0; i < books.length; i++) {
-            System.out.println(String.format("%s|", books[i].getTitle()) + books[i].getAuthor() + String.format("|%d", books[i].getYear()) + "\n");
+            if (books[i].isBookAvailable()) {
+                System.out.println(String.format("%s|", books[i].getTitle()) + books[i].getAuthor() + String.format("|%d", books[i].getYear()) + "\n");
+            }
         }
     }
 

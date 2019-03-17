@@ -7,9 +7,11 @@ public class Menu {
     private Librarian librarian;
     private Scanner scanner;
     private int userChoice;
+    private Commands commands;
 
-    public Menu(Librarian librarian) {
+    public Menu(Librarian librarian, Commands commands) {
         this.librarian = librarian;
+        this.commands = commands;
         //this.scanner = scanner;
         scanner = new Scanner(System.in);
     }
@@ -20,7 +22,8 @@ public class Menu {
 
         public String showMenuOptions() {
             return  "0. Exit Biblioteca \n" +
-                    "1. Display list of books: ";
+                    "1. Display list of books: \n" +
+                    "2. Checkout a book";
     }
 
         public int inputFromUser() {
@@ -37,7 +40,9 @@ public class Menu {
                     System.exit(0);
                 case 1:
                     librarian.listBooks();
-                    showMenuOptions();
+                    break;
+                case 2:
+                    commands.checkBookOut();
                     break;
                 default:
                     invalidMessage();
