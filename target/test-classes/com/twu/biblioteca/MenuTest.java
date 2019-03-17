@@ -8,7 +8,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
@@ -37,9 +39,11 @@ public class MenuTest {
         System.setIn(originalIn);
     }
 
-
-
-
+    @Test
+    public void shouldDisplayWelcomeMessage() {
+        String message = menu.getWelcomeMessage();
+        assertEquals(menu.getWelcomeMessage(), EXPECTED_MESSAGE);
+    }
 
     public void mockInput(String inputData) {
         InputStream in = new ByteArrayInputStream(inputData.getBytes());
@@ -63,37 +67,13 @@ public class MenuTest {
         assertEquals(menu.inputFromUser(), 7);
     }
 
-
-
-
-
-
-
     @Test
-    public void shouldDisplayWelcomeMessage() {
-        String message = menu.getWelcomeMessage();
-        assertEquals(menu.getWelcomeMessage(), EXPECTED_MESSAGE);
+    public void notifiedInvalidOption() {
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        menu.invalidMessage();
+        assertEquals("Please select a valid option!\n", outContent.toString());
     }
 
-//    @Test
-//    public void shouldBeAbleToSelectOption1toDisplayBook() {
-//       // Scanner sc = mock(Scanner.class);
-//        //when(scanner.nextLine()).thenReturn("1");
-//        String input = "1";
-//        InputStream in = new ByteArrayInputStream(input.getBytes());
-//        System.setIn(in);
-//        menu.selector();
-//        verify(librarian, times(1)).listBooks();
-//    }
-
-    @Test
-    public void shouldBeNotifiedWhenInvalidOptionIsChosen() {
-
-    }
-
-    @Test
-    public void shouldBeAbleToChooseToQuitBiblioteca() {
-
-    }
 
 }

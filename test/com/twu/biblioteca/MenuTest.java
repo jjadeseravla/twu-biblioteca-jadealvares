@@ -8,7 +8,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
@@ -63,6 +65,14 @@ public class MenuTest {
         mockInput("7\n");
         menu = new Menu(librarian);
         assertEquals(menu.inputFromUser(), 7);
+    }
+
+    @Test
+    public void notifiedInvalidOption() {
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        menu.invalidMessage();
+        assertEquals("Please select a valid option!\n", outContent.toString());
     }
 
 

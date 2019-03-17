@@ -19,8 +19,8 @@ public class Menu {
     }
 
         public String showMenuOptions() {
-            return "1. Display list of books: \n" +
-                    "2. Exit Biblioteca";
+            return  "0. Exit Biblioteca \n" +
+                    "1. Display list of books: ";
     }
 
         public int inputFromUser() {
@@ -40,7 +40,7 @@ public class Menu {
                     showMenuOptions();
                     break;
                 default:
-                    System.out.println("not choice, try again");
+                    invalidMessage();
 
             }
             return false;
@@ -51,6 +51,10 @@ public class Menu {
             boolean finish = processCommand();
             if(finish) break;
         }
+    }
+
+    public void invalidMessage() {
+        System.out.println("Please select a valid option!");
     }
 }
 
