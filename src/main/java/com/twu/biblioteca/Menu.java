@@ -7,11 +7,11 @@ public class Menu {
     private Librarian librarian;
     private Scanner scanner;
     private int userChoice;
-    private Commands commands;
+    private CheckoutBook checkoutBook;
 
-    public Menu(Librarian librarian, Commands commands) {
+    public Menu(Librarian librarian, CheckoutBook checkoutBook) {
         this.librarian = librarian;
-        this.commands = commands;
+        this.checkoutBook = checkoutBook;
         //this.scanner = scanner;
         scanner = new Scanner(System.in);
     }
@@ -42,7 +42,7 @@ public class Menu {
                     librarian.listBooks();
                     break;
                 case 2:
-                    commands.checkBookOut();
+                    checkoutBook.checkBookOut();
                     break;
                 default:
                     invalidMessage();
