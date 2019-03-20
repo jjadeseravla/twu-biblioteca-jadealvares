@@ -1,11 +1,6 @@
 package com.twu.biblioteca;
-import com.sun.tools.javac.parser.ScannerFactory;
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -19,43 +14,35 @@ import static org.mockito.Mockito.*;
 public class MenuTest {
 
     private Menu menu;
-    private String EXPECTED_MESSAGE = "Welcome to BibliotecaTest!.";
+    private String EXPECTED_MESSAGE = "Welcome to Biblioteca! Your one-stop-shop for great book titles in Bangalore! \n";
     private Book[] books = new Book[1];
     private Librarian librarian;
     private Scanner scanner;
-    private InputStream originalIn;
-    private CheckoutBook checkoutBook;
-    //ScannerFactory factory;
+    private Instruction instruction;
 
     @Before
     public void setUp() {
         librarian = mock(Librarian.class);
-        scanner = mock(Scanner.class);
-        checkoutBook = mock(CheckoutBook.class);
-        menu = new Menu(librarian, checkoutBook);
-        originalIn = System.in;
-    }
-
-    @After
-    public void tearDown() {
-        System.setIn(originalIn);
+        instruction = mock(Instruction.class);
     }
 
     @Test
     public void shouldDisplayWelcomeMessage() {
+        mockInput("");
+
         String message = menu.getWelcomeMessage();
         assertEquals(menu.getWelcomeMessage(), EXPECTED_MESSAGE);
     }
 
     public void mockInput(String inputData) {
         InputStream in = new ByteArrayInputStream(inputData.getBytes());
-        System.setIn(in);
+        scanner = new Scanner(in);
+        menu = new Menu(scanner, librarian, instruction);
     }
 
     @Test
     public void shouldBeAbleToSelectOptionsOnMenu() {
         mockInput("1\n3\n2\n");
-        menu = new Menu(librarian, checkoutBook);
         assertEquals(menu.inputFromUser(), 1);
         assertEquals(menu.inputFromUser(), 3);
         assertEquals(menu.inputFromUser(), 2);
@@ -64,16 +51,27 @@ public class MenuTest {
     @Test
     public void shouldBeAbleToSelectUnavailableOption() {
         mockInput("7\n");
-        menu = new Menu(librarian, checkoutBook);
         assertEquals(menu.inputFromUser(), 7);
     }
 
     @Test
-    public void notifiedInvalidOption() {
-        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    public void shouldBeAbleToTypeNotANumberAsOption() {
+        mockInput("lol\n");
+        assertEquals(menu.inputFromUser(), -1);
+    }
+
+    ByteArrayOutputStream outContent;
+    void captureOutput() {
+        outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
+    }
+
+    @Test
+    public void notifiedInvalidOption() {
+        mockInput("7\n");
+        captureOutput();
         menu.invalidMessage();
-        assertEquals("Please select a valid option!\n", outContent.toString());
+        assertEquals("Please select another menu option\n", outContent.toString());
     }
 
 

@@ -4,15 +4,15 @@ package com.twu.biblioteca;
         import java.util.Map;
         import java.util.Scanner;
 
-public class CheckoutBook {
+public class Instruction {
 
     final String NEWLINE = System.getProperty("line.separator");
-    private final Scanner scanner;
     private Book[] books;
     private final Map<String, Book> bookByTitle;
+    private Scanner scanner;
 
-    public CheckoutBook(Book[] books) {
-        scanner = new Scanner(System.in);
+    public Instruction(Scanner scanner, Book[] books) {
+        this.scanner = scanner;
         bookByTitle = new HashMap<String, Book>(); //map with the string title and book object
         for (int i = 0; i < books.length; i++) {
             Book book = books[i];
@@ -21,7 +21,7 @@ public class CheckoutBook {
     }
 
     public String enterTitleOfBook() {
-        System.out.println("Enter the title of the book you would like to checkout");
+        System.out.println("Enter the title of the book");
         String bookTitle = scanner.nextLine();
         return bookTitle;
     }
@@ -39,9 +39,21 @@ public class CheckoutBook {
         }
     }
 
+    public void returnABook() {
+        String bookTitle = enterTitleOfBook();
+        Book book = bookByTitle.get(bookTitle);
+        if (book == null) {
+            bookNotAvailable();
+        } else if (book.isBookAvailable()) {
+            bookNotCheckedOutToReturn(bookTitle);
+        } else {
+            book.setAvailable(true);
+            successfulReturn(bookTitle);
+        }
+    }
+
     public void bookNotAvailable() {
-        System.out.println("Sorry, that book is not available" + NEWLINE +
-                            "Please select option 2 and choose a book we have available");
+        System.out.println("Sorry, that book is not available");
     }
 
     public void bookAlreadyCheckedOut() {
@@ -49,10 +61,17 @@ public class CheckoutBook {
                             "Please select option 2 and choose a book we have available");
     }
 
+    public void bookNotCheckedOutToReturn(String bookTitle) {
+        System.out.println(bookTitle + " has not been checkedout to return");
+    }
+
     public void successfulCheckout(String bookTitle) {
         System.out.println("you have checked out " + bookTitle + NEWLINE +
-                "Thank you, enjoy the book!" + NEWLINE +
-                "Please select another menu option");
+                "Thank you, enjoy the book!");
+    }
+
+    public void successfulReturn(String bookTitle) {
+        System.out.println("Thank you, you have returned " + bookTitle);
     }
 }
 
