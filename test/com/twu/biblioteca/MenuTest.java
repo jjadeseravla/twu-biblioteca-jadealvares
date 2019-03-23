@@ -1,10 +1,10 @@
 package com.twu.biblioteca;
+import com.twu.biblioteca.model.Book;
+import com.twu.biblioteca.model.Menu;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -29,15 +29,14 @@ public class MenuTest {
     @Test
     public void shouldDisplayWelcomeMessage() {
         mockInput("");
-
         String message = menu.getWelcomeMessage();
         assertEquals(menu.getWelcomeMessage(), EXPECTED_MESSAGE);
     }
 
     public void mockInput(String inputData) {
-        InputStream in = new ByteArrayInputStream(inputData.getBytes());
-        scanner = new Scanner(in);
-        menu = new Menu(scanner, librarian, instruction);
+        //InputStream in = new ByteArrayInputStream(inputData.getBytes());
+        //scanner = new Scanner(in);
+        menu = new Menu(new TestUserInput(inputData), librarian);
     }
 
     @Test

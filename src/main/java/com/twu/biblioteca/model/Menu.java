@@ -1,17 +1,18 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.model;
 
-import java.util.Scanner;
+import com.twu.biblioteca.input.IUserInput;
+import com.twu.biblioteca.Librarian;
 
 public class Menu {
     private static final String WELCOME_MESSAGE = "Welcome to Biblioteca! Your one-stop-shop for great book titles in Bangalore! \n";
     private Librarian librarian;
-    private Scanner scanner;
-    private Instruction instruction;
+//    private Scanner scanner;
+    private IUserInput scanner;
 
-    public Menu(Scanner scanner, Librarian librarian, Instruction instruction) {
-        this.librarian = librarian;
-        this.instruction = instruction;
+    public Menu(IUserInput scanner, Librarian librarian) {
         this.scanner = scanner;
+        this.librarian = librarian;
+//        this.scanner = scanner;
     }
 
     public String getWelcomeMessage() {
@@ -22,7 +23,8 @@ public class Menu {
             return  "0. Exit Biblioteca \n" +
                     "1. Display list of books: \n" +
                     "2. Checkout a book \n" +
-                    "3. Return a book";
+                    "3. Return a book\n" +
+                    "4. Display list of movies";
     }
 
         public int inputFromUser() {
@@ -47,12 +49,17 @@ public class Menu {
                     librarian.listBooks();
                     break;
                 case 2:
-                    instruction.checkBookOut();
+                    librarian.checkBookOut();
                     break;
                 case 3:
-                    instruction.returnABook();
+                    librarian.returnABook();
+                    break;
+                case 4:
+                    librarian.listMovies();
+                    break;
                 default:
                     invalidMessage();
+                    break;
 
             }
             return false;

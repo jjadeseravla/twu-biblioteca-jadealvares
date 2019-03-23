@@ -1,34 +1,28 @@
 package com.twu.biblioteca;
 
+        import com.twu.biblioteca.model.IItem;
+
         import java.util.HashMap;
         import java.util.Map;
-        import java.util.Scanner;
 
-public class Instruction {
+public class Instruction<T extends IItem> { //set any class name that itself implements item, eg book and movie
 
     final String NEWLINE = System.getProperty("line.separator");
-    private Book[] books;
-    private final Map<String, Book> bookByTitle;
-    private Scanner scanner;
+    private T[] books;
+    private final Map<String, T> bookByTitle;
 
-    public Instruction(Scanner scanner, Book[] books) {
-        this.scanner = scanner;
-        bookByTitle = new HashMap<String, Book>(); //map with the string title and book object
+    public Instruction(T[] books) {
+        this.books = books;
+        bookByTitle = new HashMap<String, T>(); //map with the string title and book object
         for (int i = 0; i < books.length; i++) {
-            Book book = books[i];
+            T book = books[i];
             bookByTitle.put(book.getTitle(), book); // put books into hash map
         }
     }
 
-    public String enterTitleOfBook() {
-        System.out.println("Enter the title of the book");
-        String bookTitle = scanner.nextLine();
-        return bookTitle;
-    }
 
-    public void checkBookOut() {
-        String bookTitle = enterTitleOfBook();
-        Book book = bookByTitle.get(bookTitle);
+    public void checkBookOut(String bookTitle) {
+        T book = bookByTitle.get(bookTitle);
         if (book == null) {
             bookNotAvailable();
         } else if (!book.isBookAvailable()) {
@@ -39,9 +33,8 @@ public class Instruction {
         }
     }
 
-    public void returnABook() {
-        String bookTitle = enterTitleOfBook();
-        Book book = bookByTitle.get(bookTitle);
+    public void returnABook(String bookTitle) {
+        T book = bookByTitle.get(bookTitle);
         if (book == null) {
             bookNotAvailable();
         } else if (book.isBookAvailable()) {
@@ -72,6 +65,10 @@ public class Instruction {
 
     public void successfulReturn(String bookTitle) {
         System.out.println("Thank you, you have returned " + bookTitle);
+    }
+
+    public T[] getItems() {
+        return books;
     }
 }
 
