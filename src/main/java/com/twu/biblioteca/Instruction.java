@@ -1,16 +1,18 @@
 package com.twu.biblioteca;
 
+        import com.twu.biblioteca.model.IItem;
+
         import java.util.HashMap;
         import java.util.Map;
-        import java.util.Scanner;
 
-public class Instruction<T extends Item> { //set any class name that itself implements item, eg book and movie
+public class Instruction<T extends IItem> { //set any class name that itself implements item, eg book and movie
 
     final String NEWLINE = System.getProperty("line.separator");
     private T[] books;
     private final Map<String, T> bookByTitle;
 
     public Instruction(T[] books) {
+        this.books = books;
         bookByTitle = new HashMap<String, T>(); //map with the string title and book object
         for (int i = 0; i < books.length; i++) {
             T book = books[i];

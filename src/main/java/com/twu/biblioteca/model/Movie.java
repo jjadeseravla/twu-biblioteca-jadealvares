@@ -1,6 +1,8 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.model;
 
-public class Movie implements Item {
+import com.twu.biblioteca.model.IItem;
+
+public class Movie implements IItem {
     private String name;
     private int year;
     private String director;

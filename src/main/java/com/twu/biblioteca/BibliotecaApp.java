@@ -1,6 +1,12 @@
 
 package com.twu.biblioteca;
 
+        import com.twu.biblioteca.input.IUserInput;
+        import com.twu.biblioteca.input.UserInputScanner;
+        import com.twu.biblioteca.model.Book;
+        import com.twu.biblioteca.model.Menu;
+        import com.twu.biblioteca.model.Movie;
+
         import java.util.Scanner;
 
 public class BibliotecaApp {
@@ -24,12 +30,13 @@ public class BibliotecaApp {
         Movie[] movies = setupMovies();
 
         Scanner scanner = new Scanner(System.in);
-        //UserInput scanner = new UserInput();
+        IUserInput input = new UserInputScanner(scanner);
+        //IUserInput scanner = new IUserInput();
 
         Instruction<Book> bookInstruction = new Instruction<Book>(books); //<> this is an instruction of books
         Instruction<Movie> movieInstruction = new Instruction<Movie>(movies);
-        Librarian librarian = new Librarian(scanner, bookInstruction, movieInstruction);
-        Menu menu = new Menu(scanner, librarian);
+        Librarian librarian = new Librarian(input, bookInstruction, movieInstruction);
+        Menu menu = new Menu(input, librarian);
         System.out.println(menu.getWelcomeMessage());
         System.out.println(menu.showMenuOptions());
         menu.selector();

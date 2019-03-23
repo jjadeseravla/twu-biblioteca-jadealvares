@@ -1,14 +1,17 @@
 package com.twu.biblioteca;
 
-import java.util.Scanner;
+import com.twu.biblioteca.input.IUserInput;
+import com.twu.biblioteca.model.Book;
+import com.twu.biblioteca.model.Movie;
 
 public class Librarian {
     private Instruction <Book> bookInstruction;
     private Instruction <Movie> movieInstruction;
-    //private UserInput scanner;
-    private Scanner scanner;
+    private IUserInput scanner;
+    //private Scanner scanner;
 
-    public Librarian(Scanner scanner, Instruction<Book> bookInstruction, Instruction<Movie> movieInstruction) {
+    public Librarian(IUserInput scanner, Instruction<Book> bookInstruction, Instruction<Movie> movieInstruction) {
+        //this.scanner = scanner;
         this.scanner = scanner;
         this.bookInstruction = bookInstruction;
         this.movieInstruction = movieInstruction;
@@ -26,7 +29,7 @@ public class Librarian {
     public void listMovies() {
         Movie [] movies = movieInstruction.getItems();
         for (int i = 0; i < movies.length; i++) {
-                System.out.println(String.format("%s|", movies[i].getName()) + String.format("|%d", movies[i].getYear()) + String.format("|%s", movies[i].getDirector()) + String.format("%d|", movies[i].getRating()) + "\n");
+                System.out.println(String.format("%s|", movies[i].getName()) + String.format("%d|", movies[i].getYear()) + String.format("%s|", movies[i].getDirector()) + String.format("%d", movies[i].getRating()) + "\n");
         }
     }
 

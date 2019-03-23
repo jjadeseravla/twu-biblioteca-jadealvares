@@ -37,6 +37,7 @@ public class BibliotecaAppTest {
                 "1. Display list of books: \n" +
                 "2. Checkout a book \n" +
                 "3. Return a book\n" +
+                "4. Display list of movies\n" +
                 "The Count of MonteCristo|Alexandre Dumas|1800\n\n" +
 
                 "The God Delusion|Richard Dawkins|1980\n\n" +
@@ -56,12 +57,12 @@ public class BibliotecaAppTest {
                 "1. Display list of books: \n" +
                 "2. Checkout a book \n" +
                 "3. Return a book\n" +
+                "4. Display list of movies\n" +
                 "Enter the title of the book\n" +
                 "you have checked out Sapians\n" +
                 "Thank you, enjoy the book!\n" +
                 "Enter the title of the book\n" +
-                "Thank you, you have returned Sapians\n" +
-                "Please select another menu option\n", outContent.toString());
+                "Thank you, you have returned Sapians\n", outContent.toString());
     }
 
 }

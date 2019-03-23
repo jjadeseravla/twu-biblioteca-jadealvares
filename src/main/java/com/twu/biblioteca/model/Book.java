@@ -1,6 +1,8 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.model;
 
-public class Book implements Item{
+import com.twu.biblioteca.model.IItem;
+
+public class Book implements IItem {
     private String title;
     private String Author;
     private int Year;
