@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-public class Book {
+public class Book implements Item{
     private String title;
     private String Author;
     private int Year;
@@ -16,25 +16,14 @@ public class Book {
         return title;
     }
 
-    public void setTitle() {
-        this.title = title;
-    }
-
     public String getAuthor() {
         return Author;
-    }
-
-    public void setAuthor(String author) {
-        Author = author;
     }
 
     public int getYear() {
         return Year;
     }
 
-    public void setYear(int year) {
-        Year = year;
-    }
 
     public boolean isBookAvailable() {
         return available;
@@ -42,5 +31,17 @@ public class Book {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public String getName() {
+        return null;
+    }
+
+    public String getDirector() {
+        return null;
+    }
+
+    public int getRating() {
+        return 0;
     }
 }

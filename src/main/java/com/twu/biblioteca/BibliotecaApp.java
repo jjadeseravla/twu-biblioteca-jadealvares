@@ -1,6 +1,7 @@
+
 package com.twu.biblioteca;
 
-import java.util.Scanner;
+        import java.util.Scanner;
 
 public class BibliotecaApp {
 
@@ -11,15 +12,24 @@ public class BibliotecaApp {
         return new Book[]{book1, book2, book3};
     }
 
+    public Movie[] setupMovies() {
+        Movie movie1 = new Movie("movie1", 1999, "director1");
+        Movie movie2 = new Movie("movie2", 2010, "director2", 9);
+        return new Movie[]{movie1, movie2};
+    }
+
 
     public void run() {
-       Book[] books = setupBooks();
+        Book[] books = setupBooks();
+        Movie[] movies = setupMovies();
 
-       Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        //UserInput scanner = new UserInput();
 
-        Librarian librarian = new Librarian(books);
-        Instruction instruction = new Instruction(scanner, books);
-        Menu menu = new Menu(scanner, librarian, instruction);
+        Instruction<Book> bookInstruction = new Instruction<Book>(books); //<> this is an instruction of books
+        Instruction<Movie> movieInstruction = new Instruction<Movie>(movies);
+        Librarian librarian = new Librarian(scanner, bookInstruction, movieInstruction);
+        Menu menu = new Menu(scanner, librarian);
         System.out.println(menu.getWelcomeMessage());
         System.out.println(menu.showMenuOptions());
         menu.selector();
