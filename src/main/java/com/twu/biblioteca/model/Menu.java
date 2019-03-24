@@ -18,8 +18,8 @@ public class Menu {
     }
 
         public String showMenuOptions() {
-            return  "0. Exit Biblioteca \n" +
-                    "1. Display list of books: \n" +
+            return  "0. Exit Biblioteca\n" +
+                    "1. Display list of books\n" +
                     "2. Checkout a book \n" +
                     "3. Return a book\n" +
                     "4. Display list of movies\n" +
