@@ -23,7 +23,7 @@ public class BookTest {
 
     @Test
     public void showsIfBookIsAvailableBeforeCheckingOut() {
-        assertTrue(book1Test.isBookAvailable());
+        assertTrue(book1Test.isAvailable());
     }
 
 }

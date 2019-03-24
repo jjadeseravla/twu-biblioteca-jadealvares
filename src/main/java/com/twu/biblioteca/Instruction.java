@@ -8,67 +8,67 @@ package com.twu.biblioteca;
 public class Instruction<T extends IItem> { //set any class name that itself implements item, eg book and movie
 
     final String NEWLINE = System.getProperty("line.separator");
-    private T[] books;
-    private final Map<String, T> bookByTitle;
+    private T[] items;
+    private final Map<String, T> itemByTitle;
 
-    public Instruction(T[] books) {
-        this.books = books;
-        bookByTitle = new HashMap<String, T>(); //map with the string title and book object
-        for (int i = 0; i < books.length; i++) {
-            T book = books[i];
-            bookByTitle.put(book.getTitle(), book); // put books into hash map
+    public Instruction(T[] items) {
+        this.items = items;
+        itemByTitle = new HashMap<String, T>(); //map with the string title and book object
+        for (int i = 0; i < items.length; i++) {
+            T item = items[i];
+            itemByTitle.put(item.getTitle(), item); // put books into hash map
         }
     }
 
-
-    public void checkBookOut(String bookTitle) {
-        T book = bookByTitle.get(bookTitle);
-        if (book == null) {
-            bookNotAvailable();
-        } else if (!book.isBookAvailable()) {
-            bookAlreadyCheckedOut();
+    public void checkOut(String title) {
+        T item = itemByTitle.get(title);
+        if (item == null) {
+            notAvailable();
+        } else if (!item.isAvailable()) {
+            alreadyCheckedOut();
         } else {
-            book.setAvailable(false);
-            successfulCheckout(bookTitle);
+            item.setAvailable(false);
+            successfulCheckout(title);
         }
     }
 
-    public void returnABook(String bookTitle) {
-        T book = bookByTitle.get(bookTitle);
-        if (book == null) {
-            bookNotAvailable();
-        } else if (book.isBookAvailable()) {
-            bookNotCheckedOutToReturn(bookTitle);
+    public void returnABook(String title) {
+        T item = itemByTitle.get(title);
+        if (item == null) {
+            notAvailable();
+        } else if (item.isAvailable()) {
+            itemNotCheckedOutToReturn(title);
         } else {
-            book.setAvailable(true);
-            successfulReturn(bookTitle);
+            item.setAvailable(true);
+            successfulReturn(title);
         }
     }
 
-    public void bookNotAvailable() {
-        System.out.println("Sorry, that book is not available");
+    public void notAvailable() {
+        System.out.println("Sorry, that item is not available");
     }
 
-    public void bookAlreadyCheckedOut() {
-        System.out.println("you have already checked this book out"+ NEWLINE +
-                            "Please select option 2 and choose a book we have available");
+    public void alreadyCheckedOut() {
+        System.out.println("you have already checked this item out"+ NEWLINE +
+                           "Please select the menu option again and choose an item we have available");
     }
 
-    public void bookNotCheckedOutToReturn(String bookTitle) {
-        System.out.println(bookTitle + " has not been checkedout to return");
+    public void itemNotCheckedOutToReturn(String title) {
+        System.out.println(title + " has not been checked out to return");
     }
 
-    public void successfulCheckout(String bookTitle) {
-        System.out.println("you have checked out " + bookTitle + NEWLINE +
-                "Thank you, enjoy the book!");
+    public void successfulCheckout(String title) {
+        System.out.println("you have checked out " + title + NEWLINE +
+                           "Thank you, enjoy!");
     }
+    
 
-    public void successfulReturn(String bookTitle) {
-        System.out.println("Thank you, you have returned " + bookTitle);
+    public void successfulReturn(String title) {
+        System.out.println("Thank you, you have returned " + title);
     }
 
     public T[] getItems() {
-        return books;
+        return items;
     }
 }
 

@@ -26,8 +26,7 @@ public class Book implements IItem {
         return Year;
     }
 
-
-    public boolean isBookAvailable() {
+    public boolean isAvailable() {
         return available;
     }
 
@@ -35,15 +34,11 @@ public class Book implements IItem {
         this.available = available;
     }
 
-    public String getName() {
-        return null;
-    }
-
     public String getDirector() {
-        return null;
+        return "";
     }
 
-    public int getRating() {
-        return 0;
+    public String getRating() {
+        return "";
     }
 }

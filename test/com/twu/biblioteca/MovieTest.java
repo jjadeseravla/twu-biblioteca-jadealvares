@@ -11,7 +11,7 @@ public class MovieTest {
     @Test
     public void defaultOfZeroIfRatingNotSpecifiedWhenInstantiatingAMovie() {
         movie1Test = new Movie("my life movie", 1991, "me");
-        assertEquals(movie1Test.getRating(), 0);
+        assertEquals(movie1Test.getRating(), "unrated");
     }
 
 }

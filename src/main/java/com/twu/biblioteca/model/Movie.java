@@ -3,32 +3,28 @@ package com.twu.biblioteca.model;
 import com.twu.biblioteca.model.IItem;
 
 public class Movie implements IItem {
-    private String name;
+    private String title;
     private int year;
     private String director;
-    private int rating;
+    private String rating;
+    private boolean available = true;
 
-    public Movie(String name, int year, String director) {
-        this.name = name;
+    public Movie(String title, int year, String director) {
+        this.title = title;
         this.year = year;
         this.director = director;
-        this.rating = 0;
+        this.rating = "unrated";
     }
 
-    public Movie(String name, int year, String director, int rating) {
-        this.name = name;
+    public Movie(String title, int year, String director, String rating) {
+        this.title = title;
         this.year = year;
         this.director = director;
         this.rating = rating;
     }
 
-    public String getName() {
-        return name;
-    }
-
-
     public String getTitle() {
-        return null;
+        return title;
     }
 
     public String getAuthor() {
@@ -39,26 +35,19 @@ public class Movie implements IItem {
         return year;
     }
 
-    public boolean isBookAvailable() {
-        return false;
+    public boolean isAvailable() {
+        return available;
     }
 
-    public void setAvailable(boolean available) {
-
-    }
-
+    public void setAvailable(boolean available) { this.available = available; }
 
     public String getDirector() {
         return director;
     }
 
-
-    public int getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
 
 }
