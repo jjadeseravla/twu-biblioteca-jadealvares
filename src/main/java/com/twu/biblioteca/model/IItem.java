@@ -7,13 +7,11 @@ public interface IItem {
 
     int getYear();
 
-    boolean isBookAvailable();
+    boolean isAvailable();
 
     void setAvailable(boolean available);
 
-    String getName();
-
     String getDirector();
 
-    int getRating();
+    String getRating();
 }

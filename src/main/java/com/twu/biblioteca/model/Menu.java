@@ -6,13 +6,11 @@ import com.twu.biblioteca.Librarian;
 public class Menu {
     private static final String WELCOME_MESSAGE = "Welcome to Biblioteca! Your one-stop-shop for great book titles in Bangalore! \n";
     private Librarian librarian;
-//    private Scanner scanner;
     private IUserInput scanner;
 
     public Menu(IUserInput scanner, Librarian librarian) {
         this.scanner = scanner;
         this.librarian = librarian;
-//        this.scanner = scanner;
     }
 
     public String getWelcomeMessage() {
@@ -24,7 +22,8 @@ public class Menu {
                     "1. Display list of books: \n" +
                     "2. Checkout a book \n" +
                     "3. Return a book\n" +
-                    "4. Display list of movies";
+                    "4. Display list of movies\n" +
+                    "5. Checkout a movie";
     }
 
         public int inputFromUser() {
@@ -56,6 +55,9 @@ public class Menu {
                     break;
                 case 4:
                     librarian.listMovies();
+                    break;
+                case 5:
+                    librarian.checkMovieOut();
                     break;
                 default:
                     invalidMessage();

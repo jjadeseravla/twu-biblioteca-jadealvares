@@ -19,9 +19,10 @@ public class BibliotecaApp {
     }
 
     public Movie[] setupMovies() {
-        Movie movie1 = new Movie("movie1", 1999, "director1");
-        Movie movie2 = new Movie("movie2", 2010, "director2", 9);
-        return new Movie[]{movie1, movie2};
+        Movie movie1 = new Movie("Titanic", 1997, "director1");
+        Movie movie2 = new Movie("Bohemium Rhapsody", 2019, "director2", "9");
+        Movie movie3 = new Movie("Schindler's list", 1994, "Stephen Spielberg", "8");
+        return new Movie[]{movie1, movie2, movie3};
     }
 
 
@@ -31,7 +32,6 @@ public class BibliotecaApp {
 
         Scanner scanner = new Scanner(System.in);
         IUserInput input = new UserInputScanner(scanner);
-        //IUserInput scanner = new IUserInput();
 
         Instruction<Book> bookInstruction = new Instruction<Book>(books); //<> this is an instruction of books
         Instruction<Movie> movieInstruction = new Instruction<Movie>(movies);

@@ -23,7 +23,7 @@ public class LibrarianTest {
 
     public Librarian createLibrarian(IUserInput userInput) {
         book1 = new Book("testbook1", "testauthor1", 1999);
-        movie1 = new Movie("testMovie1", 2011, "testDirector1", 7);
+        movie1 = new Movie("testMovie1", 2011, "testDirector1", "7");
         Instruction bookInstruction = new Instruction<Book>(new Book[]{book1});
         Instruction movieInstruction = new Instruction<Movie>(new Movie[]{movie1});
         return new Librarian(userInput, bookInstruction, movieInstruction);
@@ -39,7 +39,7 @@ public class LibrarianTest {
     public void shouldBeAbleToEnterABookTitle() {
         String testTitle = "testbook1";
         Librarian librarian = createLibrarian(new TestUserInput(testTitle));
-        assertEquals(librarian.enterTitleOfBook(), testTitle);
+        assertEquals(librarian.enterTitle(), testTitle);
     }
 
 

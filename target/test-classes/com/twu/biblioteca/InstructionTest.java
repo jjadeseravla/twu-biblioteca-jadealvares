@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.model.Book;
+import com.twu.biblioteca.model.Movie;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
@@ -12,60 +13,54 @@ public class InstructionTest {
 
     @Test
     public void shouldBeAbleToCheckOutABook() {
-        //mockInput("testTitle\n");
         Book book = new Book("testTitle", "testAuthor", 2009);
         Instruction instruction = new Instruction(new Book[] {book});
-        assertTrue(book.isBookAvailable());
-        instruction.checkBookOut("testTitle");
-        assertFalse(book.isBookAvailable());
+        assertTrue(book.isAvailable());
+        instruction.checkOut("testTitle");
+        assertFalse(book.isAvailable());
     }
 
     @Test
     public void unsuccessfulCheckoutOrReturnIfBookIsNotInLibrary() {
-        //mockInput("ble");
         Book book = new Book("testTitle", "testAuthor", 2009);
         Instruction instruction = spy(new Instruction(new Book[] {book}));
-        instruction.checkBookOut("ble");
-        verify(instruction).bookNotAvailable();
+        instruction.checkOut("ble");
+        verify(instruction).notAvailable();
     }
 
     @Test
     public void unsuccessfulCheckoutIfTryingToCheckItOutMoreThanOnce() {
-       // mockInput("testTitle\ntestTitle\n");
         Book book = new Book("testTitle", "testAuthor", 2009);
         Instruction checkoutBook = new Instruction(new Book[] {book});
-        checkoutBook.checkBookOut("testTitle");
-        assertFalse(book.isBookAvailable());
-        checkoutBook.checkBookOut("testTitle");
-        assertFalse(book.isBookAvailable());
+        checkoutBook.checkOut("testTitle");
+        assertFalse(book.isAvailable());
+        checkoutBook.checkOut("testTitle");
+        assertFalse(book.isAvailable());
     }
 
     @Test
     public void shouldBeNotifiedIfBookHasNotBeenReturnedToCheckOutAgain() {
-        //mockInput("testTitle\ntestTitle\n");
         Book book = new Book("testTitle", "testAuthor", 2009);
         Instruction instruction = spy(new Instruction(new Book[] {book}));
-        instruction.checkBookOut("testTitle");
-        instruction.checkBookOut("testTitle");
-        verify(instruction).bookAlreadyCheckedOut();
+        instruction.checkOut("testTitle");
+        instruction.checkOut("testTitle");
+        verify(instruction).alreadyCheckedOut();
     }
 
     @Test
-    public void successfulCheckout() {
-        //mockInput("testTitle\n");
+    public void successfulBookCheckout() {
         Book book = new Book("testTitle", "testAuthor", 2009);
         Instruction instruction = spy(new Instruction(new Book[] {book}));
-        instruction.checkBookOut("testTitle");
+        instruction.checkOut("testTitle");
         verify(instruction).successfulCheckout("testTitle");
     }
 
     @Test
-    public void unsuccessfulReturnIfHaveNotCheckedOutToReturn() {
-        //mockInput("testTitle\n");
+    public void unsuccessfulReturnIfHaveNotCheckedBookOutToReturn() {
         Book book = new Book("testTitle", "testAuthor", 2009);
         Instruction instruction = spy(new Instruction(new Book[] {book}));
         instruction.returnABook("testTitle");
-        verify(instruction).bookNotCheckedOutToReturn("testTitle");
+        verify(instruction).itemNotCheckedOutToReturn("testTitle");
     }
 
 
@@ -74,8 +69,24 @@ public class InstructionTest {
         //mockInput("testTitle\ntestTitle\n");
         Book book = new Book("testTitle", "testAuthor", 2009);
         Instruction instruction = spy(new Instruction(new Book[] {book}));
-        instruction.checkBookOut("testTitle");
+        instruction.checkOut("testTitle");
         instruction.returnABook("testTitle");
         verify(instruction).successfulReturn("testTitle");
+    }
+
+    @Test
+    public void successfulMovieCheckout() {
+        Movie movie = new Movie("testTitle", 2012, "testDirector", "8");
+        Instruction instruction = spy(new Instruction(new Movie[] {movie}));
+        instruction.checkOut("testTitle");
+        verify(instruction).successfulCheckout("testTitle");
+    }
+
+    @Test
+    public void unsuccessfulCheckoutIfMovieIsNotInLibrary() {
+        Movie movie = new Movie("testTitle", 2012, "testDirector", "8");
+        Instruction instruction = spy(new Instruction(new Movie[] {movie}));
+        instruction.checkOut("gaga");
+        verify(instruction).notAvailable();
     }
 }
